@@ -8,6 +8,7 @@ import { getOrmConfig } from "./config/typeorm";
 import { configService } from "./services/config.service";
 import swaggerUI from "swagger-ui-express";
 import { swaggerConfig } from "./misc/swagger.conf";
+import cors from "cors";
 
 export class Server implements ServerInterface {
    private readonly app: express.Application;
@@ -18,6 +19,7 @@ export class Server implements ServerInterface {
    constructor() {
       this.port = configService.port;
       this.app = express();
+      this.app.use(cors());
       this.app.use(express.json());
       this.app.use(express.urlencoded({ extended: true }));
       this.app.use(express.static(path.join(__dirname, "../src/static")));
