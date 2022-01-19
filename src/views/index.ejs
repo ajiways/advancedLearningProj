@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Forms</title>
+  </head>
+  <body>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p class="modalText" id="modalText"></p>
+        <span class="close">&times;</span>
+      </div>
+    </div>
+    <div class="wrapper">
+      <form class="form form-product" method="POST" action="/products">
+        <div class="form__title">Create Product</div>
+        <input
+          type="text"
+          class="form__input form__item"
+          name="caption"
+          placeholder="Название продукта"
+        />
+        <select
+          class="form__select form__item"
+          name="category_id"
+          id="category"
+        ></select>
+        <select
+          class="form__select form__item"
+          name="brand_id"
+          id="brand"
+        ></select>
+        <input
+          type="text"
+          class="form__input form__item"
+          placeholder="Цена продукта"
+          name="price"
+        />
+        <select
+          class="form__select form__item"
+          name="currency_id"
+          id="currency"
+        ></select>
+        <textarea
+          class="form__textarea form__item"
+          name="description"
+          placeholder="Описание товара"
+        ></textarea>
+        <input
+          type="number"
+          class="form__input form__item"
+          name="available_amount"
+          placeholder="Доступное количество"
+        />
+        <button class="more" title="Открой вторую форму">>></button>
+        <button type="submit" class="form__button form__item">Submit</button>
+        <div class="car"></div>
+      </form>
+
+      <form
+        class="form form-order"
+        method="POST"
+        action="/makeorder"
+        name="form-order"
+      >
+        <div class="form__title">Create Order</div>
+        <select
+          class="form__select form__item"
+          name="customer_id"
+          id="customers"
+        ></select>
+        <select
+          class="form__select form__item"
+          name="product_id"
+          id="product"
+        ></select>
+        <div class="lasts form__item"></div>
+        <input
+          type="number"
+          class="form__input form__item"
+          name="amount"
+          id="orderAmount"
+          placeholder="Количество товара"
+        />
+        <button type="submit" class="form__button form__item">Submit</button>
+        <div class="car"></div>
+      </form>
+    </div>
+    <script src="/js/index.js"></script>
+  </body>
+</html>
