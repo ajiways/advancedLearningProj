@@ -1,9 +1,20 @@
-import express from "express";
+import { Server } from "./server";
 import { config } from "dotenv";
+import { routers } from "./routers/index";
 config();
 
-const app = express();
+const app = new Server();
 
-app.listen(process.env.PORT, () => {
-   console.log(`Server is running on ${process.env.PORT}`);
-});
+async function main() {
+   await app.connect();
+   await app.connectToDb();
+   await app.migrate();
+
+   for (const router of routers) {
+      router();
+   }
+}
+
+main().then();
+
+export { app as serverInstance };
