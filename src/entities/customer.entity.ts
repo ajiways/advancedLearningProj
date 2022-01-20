@@ -1,3 +1,4 @@
+import { IsEmail, IsPhoneNumber } from "class-validator";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("customers")
@@ -8,11 +9,13 @@ export class Customer extends BaseEntity {
    @Column({
       length: 56,
    })
+   @IsEmail()
    email!: string;
 
    @Column({
       type: "numeric",
    })
+   @IsPhoneNumber()
    phone!: number;
 
    @Column({

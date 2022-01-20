@@ -1,3 +1,4 @@
+import { Min } from "class-validator";
 import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Attachment } from "./attachment.entity";
 
@@ -13,5 +14,6 @@ export class Brand extends BaseEntity {
 
    @OneToOne(() => Attachment, { eager: true })
    @JoinColumn()
+   @Min(1)
    logoAttachment: Attachment;
 }

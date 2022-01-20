@@ -1,3 +1,4 @@
+import { min, Min } from "class-validator";
 import {
    BaseEntity,
    Column,
@@ -32,8 +33,10 @@ export class Cart extends BaseEntity {
          referencedColumnName: "id",
       },
    })
+   @Min(1)
    product!: Product;
 
    @Column()
+   @Min(1)
    amount!: number;
 }

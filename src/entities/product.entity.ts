@@ -1,3 +1,4 @@
+import { Min } from "class-validator";
 import {
    BaseEntity,
    Column,
@@ -25,20 +26,24 @@ export class Product extends BaseEntity {
 
    @ManyToOne(() => Category)
    @JoinTable()
+   @Min(1)
    category!: Category;
 
    @Column()
    description!: string;
 
    @Column()
+   @Min(1)
    price!: number;
 
    @ManyToOne(() => Currency, { eager: true })
    @JoinColumn()
+   @Min(1)
    currency!: Currency;
 
    @ManyToOne(() => Brand, { eager: true })
    @JoinColumn()
+   @Min(1)
    brand!: Brand;
 
    @Column({ nullable: true })
@@ -56,5 +61,6 @@ export class Product extends BaseEntity {
          referencedColumnName: "id",
       },
    })
+   @Min(1)
    property: Property;
 }

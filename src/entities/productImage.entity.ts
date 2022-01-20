@@ -1,3 +1,4 @@
+import { Min } from "class-validator";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Attachment } from "./attachment.entity";
 
@@ -8,12 +9,15 @@ export class ProductImage extends BaseEntity {
 
    @ManyToOne(() => Attachment, { nullable: false, eager: true })
    @JoinColumn()
+   @Min(1)
    originalAttachment?: Attachment;
 
    @ManyToOne(() => Attachment, { nullable: false, eager: true })
    @JoinColumn()
+   @Min(1)
    smallAttachment?: Attachment;
 
    @Column()
+   @Min(1)
    range!: number;
 }

@@ -1,3 +1,4 @@
+import { Min } from "class-validator";
 import {
    BaseEntity,
    Column,
@@ -23,6 +24,7 @@ export class Order extends BaseEntity {
 
    @OneToOne(() => Customer, { eager: true })
    @JoinColumn()
+   @Min(1)
    customer!: Customer;
 
    @Column({
