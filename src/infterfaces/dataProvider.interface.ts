@@ -8,9 +8,3 @@ export interface DataProviderInterface {
 
    getRepository<TEntity extends BaseEntity>(entity: new () => TEntity): Repository<TEntity>;
 }
-
-function some<T>(string: T): T {
-   return string;
-}
-
-some(5);
