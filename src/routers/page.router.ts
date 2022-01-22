@@ -1,6 +1,6 @@
 import { EMethod } from "../infterfaces/server.interface";
-import { serverInstance } from "../main";
+import { Server } from "../server";
 
-export async function pagesRouter() {
+export async function pagesRouter(serverInstance: Server) {
    serverInstance.addPageHandler("/", "index");
 }

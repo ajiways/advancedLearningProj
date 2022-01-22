@@ -1,7 +1,7 @@
-import { serverInstance } from "../main";
 import { EMethod } from "../infterfaces/server.interface";
 import { BrandsService } from "../services/brands.service";
 import { BrandsController } from "../controllers/brands.controller";
+import { Server } from "../server";
 
 /**
  * @swagger
@@ -64,7 +64,7 @@ import { BrandsController } from "../controllers/brands.controller";
  *                      $ref: '#/components/schemas/Brand'
  */
 
-export async function brandsRouter() {
+export async function brandsRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const brandsService = new BrandsService(provider);
    const brandsController = new BrandsController(brandsService);

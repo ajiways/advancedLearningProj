@@ -1,7 +1,7 @@
-import { serverInstance } from "../main";
 import { EMethod } from "../infterfaces/server.interface";
 import { CategoriesService } from "../services/categories.service";
 import { CategoriesController } from "../controllers/categories.controller";
+import { Server } from "../server";
 
 /**
  * @swagger
@@ -64,7 +64,7 @@ import { CategoriesController } from "../controllers/categories.controller";
  *                      $ref: '#/components/schemas/Category'
  */
 
-export async function categoriesRouter() {
+export async function categoriesRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const categoriesService = new CategoriesService(provider);
    const categoriesController = new CategoriesController(categoriesService);

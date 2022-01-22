@@ -1,4 +1,4 @@
-import { serverInstance } from "../main";
+import { Server } from "../server";
 import { EMethod } from "../infterfaces/server.interface";
 import { ProductImagesService } from "../services/productImages.service";
 import { ProductImagesController } from "../controllers/productsImages.controller";
@@ -68,7 +68,7 @@ import { ProductImagesController } from "../controllers/productsImages.controlle
  *                      $ref: '#/components/schemas/Productimage'
  */
 
-export async function productImagesRouter() {
+export async function productImagesRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const productImagesService = new ProductImagesService(provider);
    const productImagesController = new ProductImagesController(productImagesService);

@@ -1,4 +1,4 @@
-import { serverInstance } from "../main";
+import { Server } from "../server";
 import { EMethod } from "../infterfaces/server.interface";
 import { OrdersService } from "../services/orders.service";
 import { OrdersController } from "../controllers/orders.controller";
@@ -72,7 +72,7 @@ import { OrdersController } from "../controllers/orders.controller";
  *                      $ref: '#/components/schemas/Order'
  */
 
-export async function ordersRouter() {
+export async function ordersRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const ordersService = new OrdersService(provider);
    const ordersController = new OrdersController(ordersService);

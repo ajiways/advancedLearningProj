@@ -1,4 +1,4 @@
-import { serverInstance } from "../main";
+import { Server } from "../server";
 import { EMethod } from "../infterfaces/server.interface";
 import { PaymentsService } from "../services/payments.service";
 import { PaymentsController } from "../controllers/payments.controller";
@@ -64,7 +64,7 @@ import { PaymentsController } from "../controllers/payments.controller";
  *                      $ref: '#/components/schemas/Payment'
  */
 
-export async function paymentsRouter() {
+export async function paymentsRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const paymentsService = new PaymentsService(provider);
    const paymentsController = new PaymentsController(paymentsService);

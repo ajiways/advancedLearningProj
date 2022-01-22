@@ -1,4 +1,4 @@
-import { serverInstance } from "../main";
+import { Server } from "../server";
 import { EMethod } from "../infterfaces/server.interface";
 import { PropertiesController } from "../controllers/properties.controller";
 import { PropertiesService } from "../services/properties.service";
@@ -71,7 +71,7 @@ import { PropertiesService } from "../services/properties.service";
  *                      $ref: '#/components/schemas/Property'
  */
 
-export async function propertiesRouter() {
+export async function propertiesRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const propertiesService = new PropertiesService(provider);
    const propertiesController = new PropertiesController(propertiesService);

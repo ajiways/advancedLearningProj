@@ -1,7 +1,7 @@
-import { serverInstance } from "../main";
 import { EMethod } from "../infterfaces/server.interface";
 import { CurrenciesService } from "../services/currencies.service";
 import { CurrenciesController } from "../controllers/currencies.controller";
+import { Server } from "../server";
 
 /**
  * @swagger
@@ -64,7 +64,7 @@ import { CurrenciesController } from "../controllers/currencies.controller";
  *                      $ref: '#/components/schemas/Currency'
  */
 
-export async function currenciesRouter() {
+export async function currenciesRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const currenciesService = new CurrenciesService(provider);
    const currenciesController = new CurrenciesController(currenciesService);

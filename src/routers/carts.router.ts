@@ -1,7 +1,7 @@
-import { serverInstance } from "../main";
 import { EMethod } from "../infterfaces/server.interface";
 import { CartsService } from "../services/carts.service";
 import { CartsController } from "../controllers/carts.controller";
+import { Server } from "../server";
 
 /**
  * @swagger
@@ -64,7 +64,7 @@ import { CartsController } from "../controllers/carts.controller";
  *                      $ref: '#/components/schemas/Cart'
  */
 
-export async function cartRouter() {
+export async function cartRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const cartsService = new CartsService(provider);
    const cartsController = new CartsController(cartsService);

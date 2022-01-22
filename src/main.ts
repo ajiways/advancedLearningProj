@@ -11,10 +11,8 @@ async function main() {
    await app.migrate();
 
    for (const router of routers) {
-      router();
+      router(app);
    }
 }
 
 main().then();
-
-export { app as serverInstance };

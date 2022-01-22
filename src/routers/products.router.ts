@@ -1,6 +1,6 @@
 import { ProductsService } from "../services/products.service";
 import { ProductsController } from "../controllers/products.controller";
-import { serverInstance } from "../main";
+import { Server } from "../server";
 import { EMethod } from "../infterfaces/server.interface";
 
 /**
@@ -84,7 +84,7 @@ import { EMethod } from "../infterfaces/server.interface";
  *                      $ref: '#/components/schemas/Product'
  */
 
-export async function productsRouter() {
+export async function productsRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const productsService = new ProductsService(provider);
    const productsController = new ProductsController(productsService);

@@ -1,7 +1,7 @@
-import { serverInstance } from "../main";
 import { EMethod } from "../infterfaces/server.interface";
 import { AttachmentsService } from "../services/attachments.service";
 import { AttachmentsController } from "../controllers/attachments.controller";
+import { Server } from "../server";
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ import { AttachmentsController } from "../controllers/attachments.controller";
  *                      $ref: '#/components/schemas/Attachment'
  */
 
-export async function attachmentsRouter() {
+export async function attachmentsRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
    const attachmentsService = new AttachmentsService(provider);
    const attachmentsController = new AttachmentsController(attachmentsService);
