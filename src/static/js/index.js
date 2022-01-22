@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!validateForm(formBody)) {
          return;
       } else {
-         const res = await fetch("http://localhost:8080/products", {
+         const res = await fetch("http://localhost:3001/products", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(formBody),
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!validateForm(formBody)) {
          return;
       } else {
-         const res = await fetch("http://localhost:8080/makeorder", {
+         const res = await fetch("http://localhost:3001/makeorder", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(formBody),
@@ -96,9 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
    }
 
    async function initProductAddSide() {
-      const currencies = await fetch("http://localhost:8080/currencies").then((data) => data.json());
-      const brands = await fetch("http://localhost:8080/brands").then((data) => data.json());
-      const categories = await fetch("http://localhost:8080/categories").then((data) => data.json());
+      const currencies = await fetch("http://localhost:3001/currencies").then((data) => data.json());
+      const brands = await fetch("http://localhost:3001/brands").then((data) => data.json());
+      const categories = await fetch("http://localhost:3001/categories").then((data) => data.json());
       categories.forEach((item) => {
          categorySelect.innerHTML += `<option value="${item.id}">${item.caption}</option>`;
       });
@@ -110,8 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
    }
    async function initOrderSide() {
-      const products = await fetch("http://localhost:8080/products").then((data) => data.json());
-      const customers = await fetch("http://localhost:8080/customers").then((data) => data.json());
+      const products = await fetch("http://localhost:3001/products").then((data) => data.json());
+      const customers = await fetch("http://localhost:3001/customers").then((data) => data.json());
       const availableProducts = [];
       let currItem = products[0];
       lasts.textContent = `В наличии ${currItem.available_amount} едениц`;
