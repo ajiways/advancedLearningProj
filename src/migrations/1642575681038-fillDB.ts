@@ -438,9 +438,7 @@ export class fillDB1642575681038 implements MigrationInterface {
       ((SELECT id FROM attachments a WHERE a.name='Продукт-29' AND a.type='ORIGINAL'), (SELECT id FROM attachments a WHERE a.name='Продукт-29' AND a.type='SMALL'), ('1234'));
          
       INSERT INTO product_images (original_attachment_id, small_attachment_id, range) VALUES
-      ((SELECT id FROM attachments a WHERE a.name='Продукт-30' AND a.type='ORIGINAL'), (SELECT id FROM attachments a WHERE a.name='Продукт-30' AND a.type='SMALL'), ('1234'));
-         
-      INSERT INTO customers (email, phone, first_name, last_name) VALUES ('some@mail.com', '+7950847281', 'Igor', 'Petrov')`);
+      ((SELECT id FROM attachments a WHERE a.name='Продукт-30' AND a.type='ORIGINAL'), (SELECT id FROM attachments a WHERE a.name='Продукт-30' AND a.type='SMALL'), ('1234'));`);
    }
 
    public async down(queryRunner: QueryRunner): Promise<void> {
