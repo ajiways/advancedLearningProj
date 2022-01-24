@@ -11,13 +11,13 @@ export function getOrmConfig(): PostgresConnectionOptions {
       password: configService.dbPassword,
       database: configService.dbName,
       namingStrategy: new SnakeNamingStrategy(),
-      entities: ["entities/*.entity{.js,.ts}"],
+      entities: [`src/entities/*.entity{.js,.ts}`],
       synchronize: false,
-      migrations: ["migrations/**/*{.js,.ts}"],
+      migrations: [`src/migrations/**/*{.js,.ts}`],
       migrationsTableName: "migrations",
       logging: "all",
       cli: {
-         migrationsDir: "migrations",
+         migrationsDir: `${__dirname}/migrations`,
       },
    };
 }

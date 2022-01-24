@@ -4,11 +4,11 @@ export default [
    {
       name: "migrations:generate",
       ...getOrmConfig(),
-      entities: ["entities/**/*.entity{.js,.ts}"],
+      entities: [`src/entities/**/*.entity{.js,.ts}`],
    },
    {
       name: "migrations:create-run-revert",
       ...getOrmConfig(),
-      migrations: ["migrations/**/*{.js,.ts}"],
+      migrations: [`src/migrations/**/*{.js,.ts}`],
    },
 ];
