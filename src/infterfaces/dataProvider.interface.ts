@@ -1,5 +1,4 @@
-import { BaseEntity, EntityTarget, Repository } from "typeorm";
-import { RepositoryInterface } from "./repository.interface";
+import { BaseEntity, Repository } from "typeorm";
 
 export interface DataProviderInterface {
    connect(): Promise<void>;
