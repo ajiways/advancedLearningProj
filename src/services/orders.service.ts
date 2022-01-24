@@ -31,7 +31,7 @@ export class OrdersService {
    async findOne(id: number): Promise<Order> {
       const result = await this.ordersRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

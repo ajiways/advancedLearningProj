@@ -12,7 +12,7 @@ export class UsersService {
    async findAll(): Promise<User[]> {
       const result = await this.usersRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class UsersService {
    async findOne(id: number): Promise<User> {
       const result = await this.usersRepository.findOne({ where: { id: id } });
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

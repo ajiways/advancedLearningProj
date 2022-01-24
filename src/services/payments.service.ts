@@ -12,7 +12,7 @@ export class PaymentsService {
    async findAll(): Promise<Payment[]> {
       const result = this.paymentsRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class PaymentsService {
    async findOne(id: number): Promise<Payment> {
       const result = await this.paymentsRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

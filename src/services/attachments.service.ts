@@ -12,7 +12,7 @@ export class AttachmentsService {
    async findAll(): Promise<Attachment[]> {
       const result = this.attachmentsRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class AttachmentsService {
    async findOne(id: number): Promise<Attachment> {
       const result = await this.attachmentsRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

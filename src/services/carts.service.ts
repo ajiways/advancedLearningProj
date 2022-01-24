@@ -2,7 +2,6 @@ import { Cart } from "../entities/cart.entity";
 import { Connection, Repository } from "typeorm";
 import { CustomExcteption } from "../exceptions/custom.exception";
 import { OrdersService } from "./orders.service";
-import { orderStatus } from "../entities/order.entity";
 import { ProductsService } from "./products.service";
 
 export class CartsService {
@@ -40,7 +39,7 @@ export class CartsService {
    async findAll(): Promise<Cart[]> {
       const result = this.cartsRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -48,7 +47,7 @@ export class CartsService {
    async findOne(id: number): Promise<Cart> {
       const result = await this.cartsRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

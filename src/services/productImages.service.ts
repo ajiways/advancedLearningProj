@@ -12,7 +12,7 @@ export class ProductImagesService {
    async findAll(): Promise<ProductImage[]> {
       const result = this.attachmentsRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class ProductImagesService {
    async findOne(id: number): Promise<ProductImage> {
       const result = await this.attachmentsRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

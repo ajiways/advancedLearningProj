@@ -12,7 +12,7 @@ export class BrandsService {
    async findAll(): Promise<Brand[]> {
       const result = this.brandsRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class BrandsService {
    async findOne(id: number): Promise<Brand> {
       const result = await this.brandsRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

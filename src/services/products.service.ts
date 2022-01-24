@@ -12,7 +12,7 @@ export class ProductsService {
    async findAll(): Promise<Product[]> {
       const result = this.productsRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class ProductsService {
    async findOne(id: number): Promise<Product> {
       const result = await this.productsRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }

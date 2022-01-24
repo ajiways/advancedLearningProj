@@ -12,7 +12,7 @@ export class PropertiesService {
    async findAll(): Promise<Property[]> {
       const result = this.propertiesRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class PropertiesService {
    async findOne(id: number): Promise<Property> {
       const result = await this.propertiesRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty query result!");
       }
       return result;
    }
