@@ -1,6 +1,6 @@
 import { Order, orderStatus } from "../entities/order.entity";
 import { Connection, Repository } from "typeorm";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import { CustomException } from "../exceptions/custom.exception";
 import { UsersService } from "./user.service";
 
 export class OrdersService {
@@ -31,7 +31,7 @@ export class OrdersService {
    async findOne(id: number): Promise<Order> {
       const result = await this.ordersRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }

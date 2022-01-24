@@ -1,6 +1,6 @@
 import { ProductImage } from "../entities/productImage.entity";
 import { Connection, Repository } from "typeorm";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import { CustomException } from "../exceptions/custom.exception";
 
 export class ProductImagesService {
    private readonly attachmentsRepository: Repository<ProductImage>;
@@ -12,7 +12,7 @@ export class ProductImagesService {
    async findAll(): Promise<ProductImage[]> {
       const result = this.attachmentsRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class ProductImagesService {
    async findOne(id: number): Promise<ProductImage> {
       const result = await this.attachmentsRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }

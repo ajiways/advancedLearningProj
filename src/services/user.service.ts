@@ -1,6 +1,6 @@
 import { Connection, Repository } from "typeorm";
 import { User } from "../entities/user.entity";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import { CustomException } from "../exceptions/custom.exception";
 
 export class UsersService {
    private readonly usersRepository: Repository<User>;
@@ -12,7 +12,7 @@ export class UsersService {
    async findAll(): Promise<User[]> {
       const result = await this.usersRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class UsersService {
    async findOne(id: number): Promise<User> {
       const result = await this.usersRepository.findOne({ where: { id: id } });
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }

@@ -1,7 +1,7 @@
 import { Cart } from "../entities/cart.entity";
 import { CartsService } from "../services/carts.service";
 import { RequestInterface } from "../infterfaces/request.interface";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import { CustomException } from "../exceptions/custom.exception";
 import express from "express";
 
 export class CartsController {
@@ -13,13 +13,13 @@ export class CartsController {
 
    async createCart(request: RequestInterface, response: express.Response): Promise<string> {
       if (!request.body.product_id || !request.body.amount || !request.body.customer_id) {
-         throw CustomExcteption.BadRequest("Неправильно заполнены поля в форме");
+         throw CustomException.BadRequest("Неправильно заполнены поля в форме");
       } else if (
          Number(request.body.customer_id) <= 0 ||
          Number(request.body.product_id) <= 0 ||
          Number(request.body.amount) <= 0
       ) {
-         throw CustomExcteption.BadRequest("Неправильно заполнены поля в форме");
+         throw CustomException.BadRequest("Неправильно заполнены поля в форме");
       }
 
       const created = await this.cartsService.createCart(
@@ -40,7 +40,7 @@ export class CartsController {
 
    async getCartById(request: RequestInterface): Promise<Cart> {
       if (!request.body || !request.params.id || !Number(request.params.id)) {
-         throw CustomExcteption.BadRequest("No params for this request was provided");
+         throw CustomException.BadRequest("No params for this request was provided");
       }
       return this.cartsService.findOne(Number(request.params.id));
    }

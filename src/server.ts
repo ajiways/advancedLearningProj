@@ -91,85 +91,85 @@ export class Server implements ServerInterface {
       switch (method) {
          case "GET":
             if (middlewares) {
-               this.app.get(route, ...middlewares, async (req, res, next) => {
+               this.app.get(route, ...middlewares, async (req, res) => {
                   try {
                      const result = await handler(req, res);
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             } else {
-               this.app.get(route, async (req, res, next) => {
+               this.app.get(route, async (req, res) => {
                   try {
                      const result = await handler(req, res);
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             }
             return;
          case "POST":
             if (middlewares) {
-               this.app.post(route, ...middlewares, async (req, res, next) => {
+               this.app.post(route, ...middlewares, async (req, res) => {
                   try {
                      const result = await handler(req, res);
 
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             } else {
-               this.app.post(route, async (req, res, next) => {
+               this.app.post(route, async (req, res) => {
                   try {
                      const result = await handler(req, res);
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             }
             return;
          case "PUT":
             if (middlewares) {
-               this.app.put(route, ...middlewares, async (req, res, next) => {
+               this.app.put(route, ...middlewares, async (req, res) => {
                   try {
                      const result = await handler(req, res);
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             } else {
-               this.app.put(route, async (req, res, next) => {
+               this.app.put(route, async (req, res) => {
                   try {
                      const result = await handler(req, res);
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             }
             return;
          case "DELETE":
             if (middlewares) {
-               this.app.delete(route, ...middlewares, async (req, res, next) => {
+               this.app.delete(route, ...middlewares, async (req, res) => {
                   try {
                      const result = await handler(req, res);
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             } else {
-               this.app.delete(route, async (req, res, next) => {
+               this.app.delete(route, async (req, res) => {
                   try {
                      const result = await handler(req, res);
                      res.send(result);
                   } catch (e) {
-                     errorMiddleware(e, req, res, next);
+                     errorMiddleware(e, req, res);
                   }
                });
             }

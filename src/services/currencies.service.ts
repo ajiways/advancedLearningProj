@@ -1,6 +1,6 @@
 import { Currency } from "../entities/currency.entity";
 import { Connection, Repository } from "typeorm";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import { CustomException } from "../exceptions/custom.exception";
 
 export class CurrenciesService {
    private readonly currenciesRepository: Repository<Currency>;
@@ -12,7 +12,7 @@ export class CurrenciesService {
    async findAll(): Promise<Currency[]> {
       const result = this.currenciesRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class CurrenciesService {
    async findOne(id: number): Promise<Currency> {
       const result = await this.currenciesRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }

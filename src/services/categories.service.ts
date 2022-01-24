@@ -1,6 +1,6 @@
 import { Category } from "../entities/category.entity";
 import { Connection, Repository } from "typeorm";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import { CustomException } from "../exceptions/custom.exception";
 
 export class CategoriesService {
    private readonly categoriesRepository: Repository<Category>;
@@ -12,7 +12,7 @@ export class CategoriesService {
    async findAll(): Promise<Category[]> {
       const result = this.categoriesRepository.find();
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }
@@ -20,7 +20,7 @@ export class CategoriesService {
    async findOne(id: number): Promise<Category> {
       const result = await this.categoriesRepository.findOne(id);
       if (!result) {
-         throw CustomExcteption.NotFound("Empty query result!");
+         throw CustomException.NotFound("Empty query result!");
       }
       return result;
    }

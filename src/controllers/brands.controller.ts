@@ -1,5 +1,5 @@
 import { Brand } from "../entities/brand.entity";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import { CustomException } from "../exceptions/custom.exception";
 import { RequestInterface } from "../infterfaces/request.interface";
 import { BrandsService } from "../services/brands.service";
 
@@ -16,7 +16,7 @@ export class BrandsController {
 
    async getBrandById(request: RequestInterface): Promise<Brand> {
       if (!request.body || !request.params.id || !Number(request.params.id)) {
-         throw CustomExcteption.BadRequest("No params for this request was provided");
+         throw CustomException.BadRequest("No params for this request was provided");
       }
       return this.brandsService.findOne(Number(request.params.id));
    }

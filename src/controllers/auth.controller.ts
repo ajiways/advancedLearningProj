@@ -1,5 +1,5 @@
-import express, { NextFunction } from "express";
-import { CustomExcteption } from "../exceptions/custom.exception";
+import express from "express";
+import { CustomException } from "../exceptions/custom.exception";
 import { RequestInterface } from "../infterfaces/request.interface";
 import { AuthService } from "../services/auth.service";
 import tokensService, { userData } from "../services/tokens.service";
@@ -13,11 +13,11 @@ export class AuthController {
 
    async login(request: RequestInterface, response: express.Response): Promise<string> {
       if (request.user) {
-         throw CustomExcteption.BadRequest("Already logged in");
+         throw CustomException.BadRequest("Already logged in");
       }
 
       if (!request.body.email || !request.body.password) {
-         throw CustomExcteption.BadRequest("No email or password was provided");
+         throw CustomException.BadRequest("No email or password was provided");
       }
 
       const decodedData = (await this.authService.login(
@@ -35,7 +35,7 @@ export class AuthController {
          }
          return JSON.stringify({ message: "Добро пожаловать!" });
       } else {
-         throw CustomExcteption.BadRequest("Bad request");
+         throw CustomException.BadRequest("Bad request");
       }
    }
 }
