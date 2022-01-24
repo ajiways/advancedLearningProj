@@ -5,11 +5,11 @@ import {
    CreateDateColumn,
    Entity,
    JoinColumn,
-   OneToOne,
+   ManyToOne,
    PrimaryGeneratedColumn,
    UpdateDateColumn,
 } from "typeorm";
-import { Customer } from "./customer.entity";
+import { User } from "./user.entity";
 
 export enum orderStatus {
    PREPARING = "PREPARING",
@@ -22,10 +22,10 @@ export class Order extends BaseEntity {
    @PrimaryGeneratedColumn()
    id: number;
 
-   @OneToOne(() => Customer, { eager: true })
+   @ManyToOne(() => User)
    @JoinColumn()
    @Min(1)
-   customer!: Customer;
+   customer!: User;
 
    @Column({
       type: "enum",
