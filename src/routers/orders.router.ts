@@ -2,6 +2,7 @@ import { Server } from "../server";
 import { EMethod } from "../infterfaces/server.interface";
 import { OrdersService } from "../services/orders.service";
 import { OrdersController } from "../controllers/orders.controller";
+import { UsersService } from "../services/user.service";
 
 /**
  * @swagger
@@ -74,7 +75,8 @@ import { OrdersController } from "../controllers/orders.controller";
 
 export async function ordersRouter(serverInstance: Server) {
    const provider = serverInstance.getDBConnection();
-   const ordersService = new OrdersService(provider);
+   const userService = new UsersService(provider);
+   const ordersService = new OrdersService(provider, userService);
    const ordersController = new OrdersController(ordersService);
 
    serverInstance.addHandler(EMethod.GET, "/orders", ordersController.getAllOrders.bind(ordersController));
