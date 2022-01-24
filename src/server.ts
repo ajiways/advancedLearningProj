@@ -3,12 +3,14 @@ import http from "http";
 import path from "path";
 import express, { RequestHandler, Router } from "express";
 import { Connection, createConnection } from "typeorm";
-import { EMethod, ServerInterface, THandler } from "./infterfaces/server.interface";
+import { EMethod, ServerInterface, THandler, middlewaresArray } from "./infterfaces/server.interface";
 import { getOrmConfig } from "./config/typeorm";
 import { configService } from "./services/config.service";
 import swaggerUI from "swagger-ui-express";
 import { swaggerConfig } from "./misc/swagger.conf";
 import cors from "cors";
+import errorMiddleware from "./middlewares/error.middleware";
+import cookieParser from "cookie-parser";
 
 export class Server implements ServerInterface {
    private readonly app: express.Application;
@@ -26,6 +28,7 @@ export class Server implements ServerInterface {
       this.app.set("view engine", "ejs");
       this.app.set("views", path.join(__dirname, "../src/views"));
       this.app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerConfig));
+      this.app.use(cookieParser());
    }
 
    connect(): Promise<void> {
@@ -84,34 +87,93 @@ export class Server implements ServerInterface {
       }
    }
 
-   addHandler(method: EMethod, route: string, handler: THandler): void {
+   addHandler(method: EMethod, route: string, handler: THandler, middlewares?: middlewaresArray): void {
       switch (method) {
          case "GET":
-            this.app.get(route, async (req, res) => {
-               const result = await handler(req);
-               res.send(result);
-            });
+            if (middlewares) {
+               this.app.get(route, ...middlewares, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            } else {
+               this.app.get(route, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            }
             return;
          case "POST":
-            this.app.post(route, async (req, res) => {
-               const result = await handler(req);
-               res.send(result);
-            });
+            if (middlewares) {
+               this.app.post(route, ...middlewares, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            } else {
+               this.app.post(route, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            }
             return;
          case "PUT":
-            this.app.put(route, async (req, res) => {
-               const result = await handler(req);
-               res.send(result);
-            });
+            if (middlewares) {
+               this.app.put(route, ...middlewares, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            } else {
+               this.app.put(route, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            }
             return;
          case "DELETE":
-            this.app.delete(route, async (req, res) => {
-               const result = await handler(req);
-               res.send(result);
-            });
+            if (middlewares) {
+               this.app.delete(route, ...middlewares, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            } else {
+               this.app.delete(route, async (req, res, next) => {
+                  try {
+                     const result = await handler(req, res);
+                     res.send(result);
+                  } catch (e) {
+                     errorMiddleware(e, req, res, next);
+                  }
+               });
+            }
             return;
-         default:
-            throw new Error("Invalid method");
       }
    }
 
