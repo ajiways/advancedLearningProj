@@ -11,9 +11,9 @@ export function getOrmConfig(): PostgresConnectionOptions {
       password: configService.dbPassword,
       database: configService.dbName,
       namingStrategy: new SnakeNamingStrategy(),
-      entities: [`src/entities/*.entity{.js,.ts}`],
+      entities: [`**/entities/*.entity{.js,.ts}`],
       synchronize: false,
-      migrations: [`src/migrations/**/*{.js,.ts}`],
+      migrations: [`**/migrations/**/*{.js,.ts}`],
       migrationsTableName: "migrations",
       logging: "all",
       cli: {
