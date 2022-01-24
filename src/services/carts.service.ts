@@ -18,9 +18,7 @@ export class CartsService {
 
    async createCart(customer_id: number, product_id: number, amount: number): Promise<boolean> {
       const order = await this.orderService.createOrder(customer_id);
-      console.log(`Order: ${order}`);
       const product = await this.productsService.findOne(product_id);
-      console.log(`Product ${product}`);
 
       if (!order) {
          throw CustomExcteption.NotFound("Заказ не найден");

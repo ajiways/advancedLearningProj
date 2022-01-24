@@ -19,7 +19,6 @@ export class UsersService {
 
    async findOne(id: number): Promise<User> {
       const result = await this.usersRepository.findOne({ where: { id: id } });
-      console.log(`User: ${result}`);
       if (!result) {
          throw CustomExcteption.NotFound("Empty querry result!");
       }
