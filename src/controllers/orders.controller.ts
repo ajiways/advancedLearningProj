@@ -1,6 +1,7 @@
 import { Order } from "../entities/order.entity";
 import { OrdersService } from "../services/orders.service";
 import { RequestInterface } from "../infterfaces/request.interface";
+import { CustomExcteption } from "../exceptions/custom.exception";
 
 export class OrdersController {
    private readonly ordersService: OrdersService;
@@ -15,7 +16,7 @@ export class OrdersController {
 
    async getOrderById(request: RequestInterface): Promise<Order> {
       if (!request.body || !request.params.id || !Number(request.params.id)) {
-         throw new Error("Bad request");
+         throw CustomExcteption.BadRequest("No params for this request was provided");
       }
       return this.ordersService.findOne(Number(request.params.id));
    }

@@ -50,5 +50,13 @@ class ConfigService {
       }
       return Number(port);
    }
+
+   get secret(): string {
+      const secret = process.env.SECRET;
+      if (!secret) {
+         throw new Error("Нет секретного ключа для jwt");
+      }
+      return secret;
+   }
 }
 export const configService = new ConfigService();

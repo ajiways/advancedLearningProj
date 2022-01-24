@@ -1,5 +1,6 @@
 import { Payment } from "../entities/payment.entity";
 import { Connection, Repository } from "typeorm";
+import { CustomExcteption } from "../exceptions/custom.exception";
 
 export class PaymentsService {
    private readonly paymentsRepository: Repository<Payment>;
@@ -9,13 +10,17 @@ export class PaymentsService {
    }
 
    async findAll(): Promise<Payment[]> {
-      return this.paymentsRepository.find();
+      const result = this.paymentsRepository.find();
+      if (!result) {
+         throw CustomExcteption.NotFound("Empty querry result!");
+      }
+      return result;
    }
 
    async findOne(id: number): Promise<Payment> {
       const result = await this.paymentsRepository.findOne(id);
       if (!result) {
-         throw new Error("Empty querry result!");
+         throw CustomExcteption.NotFound("Empty querry result!");
       }
       return result;
    }

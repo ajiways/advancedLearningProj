@@ -1,4 +1,5 @@
 import { Attachment } from "../entities/attachment.entity";
+import { CustomExcteption } from "../exceptions/custom.exception";
 import { RequestInterface } from "../infterfaces/request.interface";
 import { AttachmentsService } from "../services/attachments.service";
 
@@ -15,7 +16,7 @@ export class AttachmentsController {
 
    async getAttachmentById(request: RequestInterface): Promise<Attachment> {
       if (!request.body || !request.params.id || !Number(request.params.id)) {
-         throw new Error("Bad request");
+         throw CustomExcteption.BadRequest("No params for this request was provided");
       }
       return this.attachmentsService.findOne(Number(request.params.id));
    }
