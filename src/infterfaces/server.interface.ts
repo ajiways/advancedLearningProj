@@ -1,8 +1,9 @@
-import express, { RequestHandler } from "express";
+import express, { NextFunction, RequestHandler } from "express";
 import { Connection } from "typeorm";
 import { RequestInterface } from "./request.interface";
 
-export type THandler = (request: RequestInterface) => unknown;
+export type THandler = (request: RequestInterface, response: express.Response) => unknown;
+export type middlewaresArray = Array<RequestHandler>;
 
 export enum EMethod {
    GET = "GET",
@@ -26,7 +27,7 @@ export interface ServerInterface {
 
    getDBConnection(): Connection;
 
-   addHandler(method: EMethod, route: string, handler: THandler): void;
+   addHandler(method: EMethod, route: string, handler: THandler, middlewares?: middlewaresArray): void;
 
    addPageHandler(route: string, pageName: string): void;
 }
