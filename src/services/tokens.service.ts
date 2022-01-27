@@ -9,7 +9,7 @@ export interface userData extends JwtPayload {
 
 class TokensService {
   generateToken(payload: userData): string {
-    return jwt.sign(payload, configService.secret);
+    return jwt.sign({ payload }, configService.secret);
   }
 
   validateToken(token: unknown): userData | null {

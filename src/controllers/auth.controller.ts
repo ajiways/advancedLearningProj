@@ -3,6 +3,7 @@ import { CustomException } from "../exceptions/custom.exception";
 import { RequestInterface } from "../infterfaces/request.interface";
 import { AuthService } from "../services/auth.service";
 import { isCorrectString } from "../guards/isCorrectString.guard";
+import { responseInterface } from "../infterfaces/response.interface";
 
 export class AuthController {
   private readonly authService: AuthService;
@@ -11,10 +12,7 @@ export class AuthController {
     this.authService = authService;
   }
 
-  async login(
-    request: RequestInterface,
-    response: express.Response
-  ): Promise<Record<string, string>> {
+  async login(request: RequestInterface): Promise<responseInterface> {
     if (request.user) {
       throw CustomException.BadRequest("Already logged in");
     }
@@ -31,8 +29,12 @@ export class AuthController {
       request.body.password
     );
 
-    response.cookie("token", token);
-    return { message: "Добро пожаловать!" };
+    return {
+      message: "Добро пожаловать!",
+      cookie: {
+        token,
+      },
+    };
   }
 
   async logout(
