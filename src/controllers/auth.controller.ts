@@ -2,40 +2,50 @@ import express from "express";
 import { CustomException } from "../exceptions/custom.exception";
 import { RequestInterface } from "../infterfaces/request.interface";
 import { AuthService } from "../services/auth.service";
-import tokensService, { userData } from "../services/tokens.service";
+import { isCorrectString } from "../guards/isCorrectString.guard";
 
 export class AuthController {
-   private readonly authService: AuthService;
+  private readonly authService: AuthService;
 
-   constructor(authService: AuthService) {
-      this.authService = authService;
-   }
+  constructor(authService: AuthService) {
+    this.authService = authService;
+  }
 
-   async login(request: RequestInterface, response: express.Response): Promise<string> {
-      if (request.user) {
-         throw CustomException.BadRequest("Already logged in");
-      }
+  async login(
+    request: RequestInterface,
+    response: express.Response
+  ): Promise<Record<string, string>> {
+    if (request.user) {
+      throw CustomException.BadRequest("Already logged in");
+    }
 
-      if (!request.body.email || !request.body.password) {
-         throw CustomException.BadRequest("No email or password was provided");
-      }
+    if (
+      !isCorrectString(request.body.email) ||
+      !isCorrectString(request.body.password)
+    ) {
+      throw CustomException.BadRequest("No email or password was provided");
+    }
 
-      const decodedData = (await this.authService.login(
-         String(request.body.email),
-         String(request.body.password)
-      )) as userData;
+    const token = await this.authService.login(
+      request.body.email,
+      request.body.password
+    );
 
-      if (decodedData.valid) {
-         const payload = {
-            user: decodedData.user,
-         };
-         const token = tokensService.generateToken(payload);
-         if (response) {
-            response.cookie("token", token);
-         }
-         return JSON.stringify({ message: "Добро пожаловать!" });
-      } else {
-         throw CustomException.BadRequest("Bad request");
-      }
-   }
+    response.cookie("token", token);
+    return { message: "Добро пожаловать!" };
+  }
+
+  async logout(
+    request: express.Request,
+    response: express.Response
+  ): Promise<Record<string, string>> {
+    const token = request.cookies.token;
+    if (!token) {
+      throw CustomException.BadRequest("To log out, log in first");
+    }
+
+    response.clearCookie("token");
+    response.status(200);
+    return { message: "Successfully logged out!" };
+  }
 }

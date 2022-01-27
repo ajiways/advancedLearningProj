@@ -2,7 +2,6 @@ import { EMethod } from "../infterfaces/server.interface";
 import { AuthService } from "../services/auth.service";
 import { AuthController } from "../controllers/auth.controller";
 import { Server } from "../server";
-import errorMiddleware from "../middlewares/error.middleware";
 
 /**
  * @swagger
@@ -83,10 +82,49 @@ import errorMiddleware from "../middlewares/error.middleware";
  *
  */
 
-export async function authRouter(serverInstance: Server) {
-   const provider = serverInstance.getDBConnection();
-   const authService = new AuthService(provider);
-   const authController = new AuthController(authService);
+/**
+ * @swagger
+ * /jwt/logout:
+ *    get:
+ *       summary: Try to log out
+ *       responses:
+ *          200:
+ *             description: Successful logged out
+ *             content:
+ *                application/json:
+ *                   schema:
+ *                      type: object
+ *                      properties:
+ *                        message:
+ *                          type: string
+ *                          description: details message
+ *                          example: Successfully logged out!
+ *          400:
+ *             description: User needs to be logged in to logging out
+ *             content:
+ *                application/text:
+ *                   schema:
+ *                      type: object
+ *                      properties:
+ *                         message:
+ *                            type: string
+ *                            description: description of the error
+ *                            example: "Some error description"
+ */
 
-   serverInstance.addHandler(EMethod.POST, "/jwt/login", authController.login.bind(authController));
+export async function authRouter(serverInstance: Server) {
+  const provider = serverInstance.getDBConnection();
+  const authService = new AuthService(provider);
+  const authController = new AuthController(authService);
+
+  serverInstance.addHandler(
+    EMethod.POST,
+    "/jwt/login",
+    authController.login.bind(authController)
+  );
+  serverInstance.addHandler(
+    EMethod.GET,
+    "/jwt/logout",
+    authController.logout.bind(authController)
+  );
 }
